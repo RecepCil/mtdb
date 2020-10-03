@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const MovieForm = (props) => {
   const initialFieldValues = {
+    tmdbId: "",
     movieName: "",
     director: "",
     year: "",
@@ -39,6 +40,21 @@ const MovieForm = (props) => {
 
   return (
     <form autoComplete="off" onSubmit={handleFormSubmit}>
+      <div className="form-group input-group">
+        <div className="input-group-prepend">
+          <div className="input-group-text">
+            <i class="fas fa-key"></i>
+          </div>
+        </div>
+        <input
+          name="tmdbId"
+          type="text"
+          value={values.tmdbId}
+          onChange={handleInputChange}
+          className="form-control"
+          placeholder="Tmdb ID"
+        />
+      </div>
       <div className="form-group input-group">
         <div className="input-group-prepend">
           <div className="input-group-text">
