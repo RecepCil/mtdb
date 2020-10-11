@@ -1,0 +1,37 @@
+.row {
+  color: white;
+  margin-left: 3.1rem;
+}
+
+.row-title {
+  display: table-cell;
+  cursor: default;
+  font: 700 1.1rem/1.4rem Helvetica, Arial, sans-serif;
+  color: rgb(229, 229, 229);
+  vertical-align: bottom;
+}
+
+.row_posters {
+  display: flex;
+  padding: 0.9rem 0 2.8rem;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+
+.row_posters::-webkit-scrollbar {
+  display: none;
+}
+
+.row_poster {
+  object-fit: contain;
+  height: 7.8rem;
+  max-height: 12rem;
+  margin-right: 0.3rem;
+  border-radius: 0.2rem;
+  transition: transform 450ms;
+}
+
+.row_poster:hover {
+  transform: scale(1.55);
+}

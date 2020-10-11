@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MovieForm from "./MovieForm";
 import firebaseDb from "../firebase";
 
-const Movies = () => {
+const MovieManagement = () => {
   var [movieObjects, setMovieObjects] = useState({});
   var [selectedMovieId, setSelectedMovieId] = useState("");
 
@@ -102,4 +102,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default MovieManagement;
