@@ -3,7 +3,7 @@ import "./reset.css";
 import "./App.css";
 import MovieManagement from "./components/MovieManagement";
 import Row from "./components/Row";
-import requests from "./requests";
+import MovieStatus from "./enums/MovieStatus";
 
 function App() {
   return (
@@ -14,12 +14,8 @@ function App() {
         </div>
       ) : (
         <>
-          <Row
-            title="Netflix Originals"
-            fetchUrl={requests.fetchNetflixOriginals}
-          />
-          <Row title="Trending Now" fetchUrl={requests.fetchTrending} />
-          <Row title="Action Movies" fetchUrl={requests.fetchActionMovies} />
+          <Row title="Watched Movies" status={MovieStatus.Watched}></Row>
+          <Row title="Watch List" status={MovieStatus.UnWatched}></Row>
         </>
       )}
     </div>
