@@ -1,33 +1,40 @@
 import React, { useState, useEffect } from "react";
-import axios from "../axios";
+import ref from "../firebase";
 import "./Row.css";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function Row({ title, fetchUrl }) {
+function Row({ title, status }) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      const request = await axios.get(fetchUrl);
-      setMovies(request.data.results);
-      return request;
-    }
-    fetchData();
-  }, [fetchUrl]);
+    var moviesRef = ref.child("movies");
+    moviesRef
+      .orderByChild("movieStatus")
+      .equalTo(status)
+      .on("value", (snapshot) => {
+        if (snapshot.val() != null) {
+          setMovies({
+            ...snapshot.val(),
+          });
+        } else setMovies({});
+      });
+  }, []);
 
   return (
     <div className="row">
-      <div class="row-title"> {title}</div>
+      <div className="row-title"> {title}</div>
       <div className="row_posters">
-        {movies.map((movie) => (
-          <img
-            key={movie.id}
-            className="row_poster"
-            src={`${base_url}${movie.backdrop_path}`}
-            alt={movie.name}
-          />
-        ))}
+        {Object.keys(movies).map((id) => {
+          return (
+            <img
+              key={movies[id].tmdbId}
+              className="row_poster"
+              src={`${base_url}${movies[id].photoURL}`}
+              alt={movies[id].movieName}
+            />
+          );
+        })}
       </div>
     </div>
   );
