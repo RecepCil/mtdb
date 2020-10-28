@@ -35,3 +35,48 @@
 .row_poster:hover {
   transform: scale(1.55);
 }
+
+.movie-detail {
+  border: 2px solid gray;
+  border-radius: 1rem;
+  background-color: #404040;
+  padding: 1rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
+  max-width: 50vw;
+  height: auto;
+  color: white;
+}
+
+.movie-detail-header,
+.movie-detail-body,
+.movie-detail-title,
+.movie-detail p,
+.star-container,
+svg.widget-svg {
+  background-color: inherit;
+}
+
+.movie-detail-header,
+.movie-detail-body {
+  display: block;
+}
+
+.movie-detail-title {
+  display: inline-block;
+}
+
+.movie-detail-rate {
+  float: right;
+  margin-right: 0.5rem;
+}
+
+svg.widget-svg {
+  height: 1.5rem !important;
+  width: 1.5rem !important;
+}
+
+.star-container {
+  padding: 5px 0;
+  background-color: #404040;
+}
