@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import StarRatings from "react-star-ratings";
 import ref from "../firebase";
 import "./Row.css";
 
@@ -6,6 +7,7 @@ const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, status }) {
   const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState("");
 
   useEffect(() => {
     var moviesRef = ref.child("movies");
@@ -21,6 +23,14 @@ function Row({ title, status }) {
       });
   }, []);
 
+  const showMovieComment = (movie) => {
+    if (selectedMovie && selectedMovie.tmdbId === movie.tmdbId) {
+      setSelectedMovie("");
+    } else {
+      setSelectedMovie(movie);
+    }
+  };
+
   return (
     <div className="row">
       <div className="row-title"> {title}</div>
@@ -29,6 +39,7 @@ function Row({ title, status }) {
           return (
             <img
               key={movies[id].tmdbId}
+              onClick={() => showMovieComment(movies[id])}
               className="row_poster"
               src={`${base_url}${movies[id].photoURL}`}
               alt={movies[id].movieName}
@@ -36,6 +47,29 @@ function Row({ title, status }) {
           );
         })}
       </div>
+      {selectedMovie && (
+        <div className="movie-detail">
+          <div className="movie-detail-header">
+            <div className="h5 movie-detail-title">
+              {selectedMovie.movieName}
+            </div>{" "}
+            ({selectedMovie.year}) - {selectedMovie.director}
+            <div className="movie-detail-rate">
+              <StarRatings
+                starRatedColor="#e50914"
+                rating={selectedMovie.rating}
+                numberOfStars={5}
+                starSpacing={"0"}
+                size={60}
+              />
+            </div>
+          </div>
+          <br />
+          <div className="movie-detail-body">
+            <p>{selectedMovie.comment}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
