@@ -3,6 +3,7 @@ import "./reset.css";
 import "./App.css";
 import MovieManagement from "./components/MovieManagement";
 import Row from "./components/Row";
+import Banner from "./components/Banner";
 import MovieStatus from "./enums/MovieStatus";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         </div>
       ) : (
         <>
+          <Banner />
           <Row title="Watched Movies" status={MovieStatus.Watched}></Row>
           <Row title="Watch List" status={MovieStatus.UnWatched}></Row>
         </>
