@@ -36,6 +36,11 @@
   transform: scale(1.55);
 }
 
+.row_posterLarge {
+  height: 22rem;
+  max-height: 22rem;
+}
+
 .movie-detail {
   border: 2px solid gray;
   border-radius: 1rem;

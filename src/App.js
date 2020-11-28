@@ -16,6 +16,7 @@ function App() {
       ) : (
         <>
           <Banner />
+          <Row title="Favorite Movies" status={MovieStatus.Favorite}></Row>
           <Row title="Watched Movies" status={MovieStatus.Watched}></Row>
           <Row title="Watch List" status={MovieStatus.UnWatched}></Row>
         </>
