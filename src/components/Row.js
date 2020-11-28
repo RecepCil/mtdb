@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
 import ref from "../firebase";
+import MovieStatus from "../enums/MovieStatus";
 import "./Row.css";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
@@ -40,8 +41,12 @@ function Row({ title, status }) {
             <img
               key={movies[id].tmdbId}
               onClick={() => showMovieComment(movies[id])}
-              className="row_poster"
-              src={`${base_url}${movies[id].photoURL}`}
+              className={`row_poster ${
+                (movies[id].movieStatus == MovieStatus.Favorite) && "row_posterLarge"
+              }`}
+              src={`${base_url}${
+                (movies[id].movieStatus == MovieStatus.Favorite) ? movies[id].photoURL : movies[id].backdrop_path
+              }`}
               alt={movies[id].movieName}
             />
           );
