@@ -4,6 +4,7 @@ import "./App.css";
 import MovieManagement from "./components/MovieManagement";
 import Row from "./components/Row";
 import Banner from "./components/Banner";
+import Nav from "./components/Nav";
 import MovieStatus from "./enums/MovieStatus";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         </div>
       ) : (
         <>
+          <Nav />
           <Banner />
           <Row title="Favorite Movies" status={MovieStatus.Favorite}></Row>
           <Row title="Watched Movies" status={MovieStatus.Watched}></Row>
