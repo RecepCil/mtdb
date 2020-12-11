@@ -24,6 +24,28 @@
     object-fit: contain;
     background-color: transparent;
   }
+
+  .nav_tabs ul{
+    position: fixed;
+    left: 12rem;
+    top: 1.6rem;
+    background-color: transparent;
+  }
+
+  .nav_tabs li{
+    display: inline-block;
+    margin-left: 1rem;
+    background-color: inherit;
+  }
+
+  .nav_tab{ 
+    color: white;
+  }
+
+  .nav_tab:hover{ 
+    color: white;
+    text-decoration: none;
+  }
   
   .nav_avatar {
     position: fixed;
