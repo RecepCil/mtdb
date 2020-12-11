@@ -10,6 +10,7 @@
     "dotenv": "^8.2.0",
     "firebase": "^7.21.1",
     "react": "^16.13.1",
+    "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
     "react-star-ratings": "^2.3.0"
