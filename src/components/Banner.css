@@ -42,14 +42,16 @@
     border-radius: 0.4vw;
     padding: 0.8rem 2rem;
     margin-right: 1rem;
-  
     background-color: rgba(51, 51, 51, 0.5);
   }
-  
+
   .banner_button:hover {
-    /* color: #000; */
     background-color: #e6e6e6;
     transition: all 0.2s;
+  }
+
+  .banner_button div{
+    background-color: rgba(51, 51, 51, 0);
   }
   
   svg {
@@ -69,3 +71,7 @@
     );
   }
   
+  .movie-detail-rate {
+    float: right;
+    margin-right: 0.5rem;
+  }

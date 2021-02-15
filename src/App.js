@@ -1,23 +1,27 @@
 import React from "react";
+import MovieManagement from "./components/MovieManagement";
+import Nav from "./components/Nav";
+import Banner from "./components/Banner";
+import Row from "./components/Row";
+import MovieStatus from "./enums/MovieStatus";
+import { useSelector } from 'react-redux'; 
 import "./reset.css";
 import "./App.css";
-import MovieManagement from "./components/MovieManagement";
-import Row from "./components/Row";
-import Banner from "./components/Banner";
-import Nav from "./components/Nav";
-import MovieStatus from "./enums/MovieStatus";
 
 function App() {
+  const isLogged = useSelector(state => state.isLogged);
   return (
     <div className="app">
-      {false ? (
+      {isLogged ? (
         <div className="col-md-8 offset-md-2">
           <MovieManagement />
         </div>
       ) : (
         <>
           <Nav />
-          <Banner />
+          <section  id='banner'>
+            <Banner />
+          </section>
           <section  id='favoriteMovies'>
             <Row title="Favorite Movies" status={MovieStatus.Favorite}></Row>
           </section>
