@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import StarRatings from "react-star-ratings";
 import ref from "../firebase";
 import MovieStatus from "../enums/MovieStatus";
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+import { useSelector, useDispatch } from 'react-redux'; 
+import { addItem } from '../actions';
 import "./Row.css";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, status }) {
-  const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState("");
+  const [movies, setMovies] = useState([]);   // the useState initializes the state
+  const selectedMovie = useSelector(state => state.selectedMovie);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     var moviesRef = ref.child("movies");
@@ -26,9 +29,9 @@ function Row({ title, status }) {
 
   const showMovieComment = (movie) => {
     if (selectedMovie && selectedMovie.tmdbId === movie.tmdbId) {
-      setSelectedMovie("");
+      dispatch(addItem({}));
     } else {
-      setSelectedMovie(movie);
+      dispatch(addItem(movie));
     }
   };
 
@@ -38,43 +41,22 @@ function Row({ title, status }) {
       <div className="row_posters">
         {Object.keys(movies).map((id) => {
           return (
-            <img
-              key={movies[id].tmdbId}
-              onClick={() => showMovieComment(movies[id])}
-              className={`row_poster ${
-                (movies[id].movieStatus == MovieStatus.Favorite) && "row_posterLarge"
-              }`}
-              src={`${base_url}${
-                (movies[id].movieStatus == MovieStatus.Favorite) ? movies[id].photoURL : movies[id].backdrop_path
-              }`}
-              alt={movies[id].movieName}
-            />
+            <AnchorLink href="#banner">  
+              <img
+                key={movies[id].tmdbId}
+                onClick={() => showMovieComment(movies[id])}
+                className={`row_poster ${
+                  (movies[id].movieStatus === MovieStatus.Favorite) && "row_posterLarge"
+                }`}
+                src={`${base_url}${
+                  (movies[id].movieStatus === MovieStatus.Favorite) ? movies[id].photoURL : movies[id].backdrop_path
+                }`}
+                alt={movies[id].movieName}
+              />
+            </AnchorLink>
           );
         })}
       </div>
-      {selectedMovie && (
-        <div className="movie-detail">
-          <div className="movie-detail-header">
-            <div className="h5 movie-detail-title">
-              {selectedMovie.movieName}
-            </div>{" "}
-            ({selectedMovie.year}) - {selectedMovie.director}
-            <div className="movie-detail-rate">
-              <StarRatings
-                starRatedColor="#e50914"
-                rating={selectedMovie.rating}
-                numberOfStars={5}
-                starSpacing={"0"}
-                size={60}
-              />
-            </div>
-          </div>
-          <br />
-          <div className="movie-detail-body">
-            <p>{selectedMovie.comment}</p>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

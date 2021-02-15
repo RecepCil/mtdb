@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./Nav.css";
 import AnchorLink from 'react-anchor-link-smooth-scroll'
+import "./Nav.css";
 
 function Nav() {
   const [show, handleShow] = useState(false);
