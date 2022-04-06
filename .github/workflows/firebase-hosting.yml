@@ -21,8 +21,8 @@ jobs:
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
-          name: build
-          path: build
+          name: dist
+          path: dist
   deploy:
     name: Deploy
     needs: build
@@ -33,11 +33,14 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@master
         with:
-          name: build
+          name: dist
+          path: dist
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}        
+        with: 
+          args: deploy --message \"${{ github.event.head_commit.message }}\"
         
