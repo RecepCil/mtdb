@@ -7,6 +7,10 @@ on:
     branches: 
       - master 
 
+defaults:
+  run:
+    working-directory: ./frontend
+
 jobs:
   build:
     name: Build
@@ -22,7 +26,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: build
-          path: build
+          path: ./frontend/build
     env:
       REACT_APP_FIREBASE_API_KEY: ${{secrets.FIREBASE_API_KEY}} 
       REACT_APP_FIREBASE_AUTH_DOMAIN: ${{secrets.FIREBASE_AUTH_DOMAIN}} 
@@ -44,10 +48,11 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: build
-          path: build
+          path: ./frontend/build
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}} 
+          PROJECT_PATH: "./frontend"
